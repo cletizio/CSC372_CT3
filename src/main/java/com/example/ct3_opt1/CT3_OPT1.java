@@ -5,8 +5,14 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class CT3_OPT1 extends Application  {
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -15,12 +21,15 @@ public class CT3_OPT1 extends Application  {
         MenuItem menuItem2 = new MenuItem("Write to txt file");
         MenuItem menuItem3 = new MenuItem("Option 3");
         MenuItem menuItem4 = new MenuItem("Exit");
+        TextField dateTime = new TextField();
 
-        menuItem1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                System.out.println("FIXME date/time");
-            }
+
+        menuItem1.setOnAction((ActionEvent event) -> {
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            dateTime.setText(dtf.format(now));
+
         });
         menuItem3.setOnAction(new EventHandler<>() {
 
@@ -40,7 +49,7 @@ public class CT3_OPT1 extends Application  {
             }
         });
         MenuButton menuButton = new MenuButton("Options", null, menuItem1, menuItem2, menuItem3, menuItem4);
-        HBox hbox = new HBox(menuButton);
+        HBox hbox = new HBox(menuButton, dateTime);
         Scene scene = new Scene(hbox, 600, 300);
         primaryStage.setScene(scene);
         primaryStage.show();
