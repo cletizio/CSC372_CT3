@@ -26,18 +26,11 @@ public class CT3_OPT1 extends Application  {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Option 3 selected");
+                System.out.println("FIXME: Change background color");
             }
         });
         menuItem2.setOnAction(event -> {
                 System.out.println("FIXME: Write to TXT file.");
-});
-        menuItem3.setOnAction(new EventHandler<>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Option 3 selected");
-            }
         });
 
         menuItem4.setOnAction(new EventHandler<ActionEvent>() {
@@ -46,9 +39,9 @@ public class CT3_OPT1 extends Application  {
                 System.out.println("FIXME: Exit Program");
             }
         });
-        MenuButton menuButton = new MenuButton("Options", null, menuItem1, menuItem2, menuItem3);
+        MenuButton menuButton = new MenuButton("Options", null, menuItem1, menuItem2, menuItem3, menuItem4);
         HBox hbox = new HBox(menuButton);
-        Scene scene = new Scene(hbox, 200, 100);
+        Scene scene = new Scene(hbox, 600, 300);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
