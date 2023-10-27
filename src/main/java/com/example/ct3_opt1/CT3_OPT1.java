@@ -2,10 +2,13 @@ package com.example.ct3_opt1;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -21,11 +24,10 @@ public class CT3_OPT1 extends Application  {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Pane pane = null;
+        GridPane pane = null;
         Scene scene = null;
 
-
-        pane = new Pane();
+        pane = new GridPane();
         scene = new Scene(pane);
 
         primaryStage.setTitle("User Interface Example");
@@ -34,10 +36,17 @@ public class CT3_OPT1 extends Application  {
         MenuItem menuItem3 = new MenuItem("Option 3");
         MenuItem menuItem4 = new MenuItem("Exit");
         dateTime = new TextField();
+        dateTime.setAlignment(Pos.CENTER);
         dateTime.setEditable(false);
-        pane.getChildren().add(dateTime);
+        pane.add(dateTime, 1, 1);
+
+        Insets gridPadding = new Insets(10,10,10,10);
+        pane.setPadding(gridPadding);
+        pane.setHgap(20);
+        pane.setVgap(20);
 
         TextField finalDateTime = dateTime;
+
         menuItem1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -68,9 +77,8 @@ public class CT3_OPT1 extends Application  {
             }
         });
         MenuButton menuButton = new MenuButton("Options", null, menuItem1, menuItem2, menuItem3, menuItem4);
-        HBox hbox = new HBox(menuButton, dateTime);
-        scene = new Scene(hbox, 600, 300);
 
+        pane.add(menuButton, 0, 0);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
