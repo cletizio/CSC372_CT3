@@ -7,6 +7,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.BufferedWriter;
@@ -16,21 +17,34 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class CT3_OPT1 extends Application  {
-    private TextField dateTime;
+    TextField dateTime = null;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Pane pane = null;
+        Scene scene = null;
+
+
+        pane = new Pane();
+        scene = new Scene(pane);
+
         primaryStage.setTitle("User Interface Example");
         MenuItem menuItem1 = new MenuItem("Display Date/Time");
         MenuItem menuItem2 = new MenuItem("Write to txt file");
         MenuItem menuItem3 = new MenuItem("Option 3");
         MenuItem menuItem4 = new MenuItem("Exit");
         dateTime = new TextField();
+        dateTime.setEditable(false);
+        pane.getChildren().add(dateTime);
 
-        menuItem1.setOnAction((ActionEvent event) -> {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
-            dateTime.setText(dtf.format(now));
+        TextField finalDateTime = dateTime;
+        menuItem1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                LocalDateTime now = LocalDateTime.now();
+                finalDateTime.setText(dtf.format(now));
+            }
         });
 
         menuItem2.setOnAction(new EventHandler<ActionEvent>() {
@@ -41,7 +55,6 @@ public class CT3_OPT1 extends Application  {
         });
 
         menuItem3.setOnAction(new EventHandler<>() {
-
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("FIXME: Change background color");
@@ -56,7 +69,8 @@ public class CT3_OPT1 extends Application  {
         });
         MenuButton menuButton = new MenuButton("Options", null, menuItem1, menuItem2, menuItem3, menuItem4);
         HBox hbox = new HBox(menuButton, dateTime);
-        Scene scene = new Scene(hbox, 600, 300);
+        scene = new Scene(hbox, 600, 300);
+
         primaryStage.setScene(scene);
         primaryStage.show();
     }
