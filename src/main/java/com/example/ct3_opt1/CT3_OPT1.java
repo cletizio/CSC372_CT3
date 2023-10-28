@@ -1,4 +1,5 @@
 package com.example.ct3_opt1;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -11,7 +12,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -22,11 +25,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
-public class CT3_OPT1 extends Application  {
+public class CT3_OPT1 extends Application {
     TextField dateTime = null;
     Stage primaryStage = null;
     GridPane pane = null;
     Scene scene = null;
+
+    public static void main(String[] args) {
+        Application.launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -47,7 +54,7 @@ public class CT3_OPT1 extends Application  {
         dateTime.setEditable(false);
         pane.add(dateTime, 1, 1);
 
-        Insets gridPadding = new Insets(10,10,10,10);
+        Insets gridPadding = new Insets(10, 10, 10, 10);
         pane.setPadding(gridPadding);
         pane.setHgap(20);
         pane.setVgap(20);
@@ -89,31 +96,28 @@ public class CT3_OPT1 extends Application  {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    public static void main(String[] args) {
-        Application.launch(args);
-    }
 
-    private void writeToFile(){
+    private void writeToFile() {
         String dateTimeBoxInfo = dateTime.getText();
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt"));
             writer.write(dateTimeBoxInfo);
             writer.close();
             System.out.println("Successfully wrote to file.");
-        } catch (IOException event){
+        } catch (IOException event) {
             event.printStackTrace();
             System.err.println("Unable to write to file. " + event);
         }
     }
 
-    private void setRandomGreenBackground(){
+    private void setRandomGreenBackground() {
         Random random = new Random();
         final int red = 0;
         int green = random.nextInt(256);
         final int blue = 0;
 
         try {
-            Color randGreen = Color.rgb (red, green, blue);
+            Color randGreen = Color.rgb(red, green, blue);
             BackgroundFill backgroundFill = new BackgroundFill(randGreen, null, null);
             Background background = new Background(backgroundFill);
             pane.setBackground(background);
