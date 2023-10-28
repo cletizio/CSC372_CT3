@@ -1,5 +1,6 @@
 package com.example.ct3_opt1;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -79,7 +80,7 @@ public class CT3_OPT1 extends Application  {
         menuItem4.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("FIXME: Exit Program");
+                Platform.exit();
             }
         });
         MenuButton menuButton = new MenuButton("Options", null, menuItem1, menuItem2, menuItem3, menuItem4);
@@ -95,7 +96,7 @@ public class CT3_OPT1 extends Application  {
     private void writeToFile(){
         String dateTimeBoxInfo = dateTime.getText();
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("datetime.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt"));
             writer.write(dateTimeBoxInfo);
             writer.close();
             System.out.println("Successfully wrote to file.");
